@@ -1,6 +1,6 @@
-import api from "./api";
+import { IClientData } from "../contexts/interfaces";
 
-import { IClientData } from "./interfaces";
+import api from "./api";
 
 const registerClient = async (clientData: IClientData) => {
   return await api
