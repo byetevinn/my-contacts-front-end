@@ -22,4 +22,5 @@ export interface IClientLoginResponse {
 
 export interface IClientsContext {
   loginClient: (data: any) => void;
+  registerClient: (data: any) => void;
 }
