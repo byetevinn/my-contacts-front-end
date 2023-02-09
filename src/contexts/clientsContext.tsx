@@ -1,13 +1,26 @@
 import { createContext } from "react";
+import LoginClient from "../services/loginClientApi";
 
-import { IClientsContextProps } from "./interfaces";
+import {
+  IClientLogin,
+  IClientsContext,
+  IClientsContextProps,
+} from "./interfaces";
 
-export const clientsContext = createContext({});
+export const clientsContext = createContext<IClientsContext>(
+  {} as IClientsContext
+);
 
-const clientsProvider = ({ children }: IClientsContextProps) => {
+const ClientsProvider = ({ children }: IClientsContextProps) => {
+  const loginClient = async (clientLogin: IClientLogin) => {
+    await LoginClient(clientLogin);
+  };
+
   return (
-    <clientsContext.Provider value={{}}>{children}</clientsContext.Provider>
+    <clientsContext.Provider value={{ loginClient }}>
+      {children}
+    </clientsContext.Provider>
   );
 };
 
-export default clientsProvider;
+export default ClientsProvider;
