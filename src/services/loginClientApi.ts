@@ -1,13 +1,18 @@
+import axios from "axios";
 import { toast } from "react-toastify";
 import { IClientLogin } from "../contexts/interfaces";
 
 import api from "./api";
 
-const LoginClient = async (clientLogin: IClientLogin) => {
+const LoginClientApi = async (clientLogin: IClientLogin) => {
   return await api
     .post("/login", clientLogin)
     .then((response) => {
-      localStorage.setItem("@token", response.data.token);
+      const token = response.data.token;
+
+      localStorage.setItem("@token", token);
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       toast.success("Logado com sucesso", {
         autoClose: 1000,
@@ -23,7 +28,9 @@ const LoginClient = async (clientLogin: IClientLogin) => {
         theme: "dark",
         toastId: 1,
       });
+
+      throw new Error();
     });
 };
 
-export default LoginClient;
+export default LoginClientApi;
