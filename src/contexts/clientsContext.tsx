@@ -1,23 +1,34 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DeleteClientApi from "../services/client/deleteClientApi";
 
-import GetClientApi from "../services/getClientApi";
-import LoginClientApi from "../services/loginClientApi";
-import RegisterClientApi from "../services/registerClientApi";
+import LoginClientApi from "../services/login/loginClientApi";
+import RegisterClientApi from "../services/client/registerClientApi";
+import GetClientApi from "../services/client/getClientApi";
+import UpdateClientApi from "../services/client/updateClientApi";
 
 import {
   IClient,
   IClientData,
   IClientLogin,
-  IClientsContext,
-  IClientsContextProps,
+  IContextProps,
+  IClientUpdate,
 } from "./interfaces";
 
 export const clientsContext = createContext<IClientsContext>(
   {} as IClientsContext
 );
 
-const ClientsProvider = ({ children }: IClientsContextProps) => {
+interface IClientsContext {
+  loginClient: (clientData: IClientLogin) => void;
+  registerClient: (clientData: IClientData) => void;
+  getClient: () => void;
+  updateClient: (data: IClientUpdate) => void;
+  deleteClient: () => void;
+  client: IClient;
+}
+
+const ClientsProvider = ({ children }: IContextProps) => {
   const [client, setClient] = useState<IClient>({} as IClient);
 
   const navigate = useNavigate();
@@ -30,9 +41,9 @@ const ClientsProvider = ({ children }: IClientsContextProps) => {
     } catch (error) {}
   };
 
-  const registerClient = async (clientData: IClientData) => {
+  const registerClient = async (data: IClientData) => {
     try {
-      await RegisterClientApi(clientData);
+      await RegisterClientApi(data);
 
       navigate("/");
     } catch (error) {}
@@ -44,9 +55,36 @@ const ClientsProvider = ({ children }: IClientsContextProps) => {
     setClient(clientData);
   };
 
+  const updateClient = async (clientData: IClientUpdate) => {
+    const { email, password, fullName, phone } = clientData;
+
+    const clientNoPassword = { email, fullName, phone };
+
+    if (password!.length > 0) {
+      await UpdateClientApi(clientData);
+    } else {
+      await UpdateClientApi(clientNoPassword);
+    }
+  };
+
+  const deleteClient = async () => {
+    await DeleteClientApi();
+
+    localStorage.clear();
+
+    navigate("/login");
+  };
+
   return (
     <clientsContext.Provider
-      value={{ loginClient, registerClient, getClient, client }}
+      value={{
+        loginClient,
+        registerClient,
+        getClient,
+        updateClient,
+        deleteClient,
+        client,
+      }}
     >
       {children}
     </clientsContext.Provider>

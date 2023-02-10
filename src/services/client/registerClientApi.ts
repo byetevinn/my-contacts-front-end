@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 
-import { IClientData } from "../contexts/interfaces";
+import api from "../api";
 
-import api from "./api";
+import { IClientData } from "../../contexts/interfaces";
 
 const RegisterClientApi = async (clientData: IClientData) => {
   return await api

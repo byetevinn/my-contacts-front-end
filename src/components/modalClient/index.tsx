@@ -4,60 +4,52 @@ import { useForm } from "react-hook-form";
 import { clientsContext } from "../../contexts/clientsContext";
 
 import { IClientData } from "../../contexts/interfaces";
-import { IModalRegisterClientProps } from "./interface";
+import { IModalClientProps } from "./interface";
 
-const ModalRegisterClient = ({
-  activateModal,
-  setActiateModal,
-}: IModalRegisterClientProps) => {
+const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
   const { register, handleSubmit } = useForm<IClientData>();
 
-  const { registerClient } = useContext(clientsContext);
+  const { updateClient, deleteClient, client } = useContext(clientsContext);
+
+  const { email, fullName, phone } = client;
 
   return (
     <>
       {activateModal && (
         <>
           <button onClick={() => setActiateModal(!activateModal)}>X</button>
-          <form onSubmit={handleSubmit(registerClient)}>
+          <form onSubmit={handleSubmit(updateClient)}>
             <label>
               Email
-              <input
-                type="email"
-                placeholder="joão@mail.com"
-                {...register("email")}
-              />
+              <input type="email" {...register("email")} defaultValue={email} />
             </label>
             <label>
               Senha
-              <input
-                type="password"
-                placeholder="*******"
-                {...register("password")}
-              />
+              <input type="password" {...register("password")} />
             </label>
             <label>
               Nome Completo
               <input
                 type="text"
-                placeholder="João dos Santos"
                 {...register("fullName")}
+                defaultValue={fullName}
               />
             </label>
             <label>
               Celular
               <input
                 type="number"
-                placeholder="41998751475"
                 {...register("phone")}
+                defaultValue={phone}
               />
             </label>
             <button type="submit">Registrar</button>
           </form>
+          <button onClick={() => deleteClient()}>Deletar Perfil</button>
         </>
       )}
     </>
   );
 };
 
-export default ModalRegisterClient;
+export default ModalClient;

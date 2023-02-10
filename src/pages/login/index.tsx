@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import ModalRegisterClient from "../../components/modalRegisterClient";
+
 import { clientsContext } from "../../contexts/clientsContext";
+import { IClientLogin } from "../../contexts/interfaces";
 
 const Login = () => {
   const [activateModal, setActiateModal] = useState<boolean>(false);
 
   const { loginClient } = useContext(clientsContext);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<IClientLogin>();
 
   const navigate = useNavigate();
 
