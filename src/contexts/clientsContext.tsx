@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DeleteClientApi from "../services/deleteClientApi";
 
 import GetClientApi from "../services/getClientApi";
 import LoginClientApi from "../services/loginClientApi";
@@ -44,9 +45,17 @@ const ClientsProvider = ({ children }: IClientsContextProps) => {
     setClient(clientData);
   };
 
+  const deleteClient = async () => {
+    await DeleteClientApi();
+
+    localStorage.clear();
+
+    navigate("/login");
+  };
+
   return (
     <clientsContext.Provider
-      value={{ loginClient, registerClient, getClient, client }}
+      value={{ loginClient, registerClient, getClient, deleteClient, client }}
     >
       {children}
     </clientsContext.Provider>

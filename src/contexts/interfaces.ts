@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import DeleteClient from "../services/deleteClientApi";
 
 export interface IClientsContextProps {
   children: ReactNode;
@@ -24,6 +25,7 @@ export interface IClientsContext {
   loginClient: (data: any) => void;
   registerClient: (data: any) => void;
   getClient: () => void;
+  deleteClient: () => void;
   client: IClient;
 }
 

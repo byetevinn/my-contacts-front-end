@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { clientsContext } from "../../contexts/clientsContext";
 
 import { IModalClientProps } from "./interface";
 
 const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
   const { register, handleSubmit } = useForm();
+
+  const { deleteClient } = useContext(clientsContext);
 
   return (
     <>
@@ -45,6 +49,7 @@ const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
             </label>
             <button type="submit">Registrar</button>
           </form>
+          <button onClick={() => deleteClient()}>Deletar Perfil</button>
         </>
       )}
     </>
