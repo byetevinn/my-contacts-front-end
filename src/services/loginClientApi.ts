@@ -1,4 +1,3 @@
-import axios from "axios";
 import { toast } from "react-toastify";
 import { IClientLogin } from "../contexts/interfaces";
 
@@ -11,8 +10,6 @@ const LoginClientApi = async (clientLogin: IClientLogin) => {
       const token = response.data.token;
 
       localStorage.setItem("@token", token);
-
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       toast.success("Logado com sucesso", {
         autoClose: 1000,

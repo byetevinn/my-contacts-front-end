@@ -1,5 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
 import ModalRegisterClient from "../../components/modalRegisterClient";
 import { clientsContext } from "../../contexts/clientsContext";
 
@@ -9,6 +11,16 @@ const Login = () => {
   const { loginClient } = useContext(clientsContext);
 
   const { register, handleSubmit } = useForm();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("@token");
+
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   return (
     <>
