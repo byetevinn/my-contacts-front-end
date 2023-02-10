@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
-import api from "./api";
+
+import api from "../api";
 
 const DeleteClientApi = async () => {
   return await api

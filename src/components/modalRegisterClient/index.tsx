@@ -1,13 +1,16 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+
 import { clientsContext } from "../../contexts/clientsContext";
+
+import { IClientData } from "../../contexts/interfaces";
 import { IModalRegisterClientProps } from "./interface";
 
 const ModalRegisterClient = ({
   activateModal,
   setActiateModal,
 }: IModalRegisterClientProps) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<IClientData>();
 
   const { registerClient } = useContext(clientsContext);
 
@@ -29,7 +32,7 @@ const ModalRegisterClient = ({
               Senha
               <input
                 type="password"
-                placeholder="joão@mail.com"
+                placeholder="*******"
                 {...register("password")}
               />
             </label>

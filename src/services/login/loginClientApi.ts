@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
-import { IClientLogin } from "../contexts/interfaces";
+import { IClientLogin } from "../../contexts/interfaces";
 
-import api from "./api";
+import api from "../api";
 
 const LoginClientApi = async (clientLogin: IClientLogin) => {
   return await api

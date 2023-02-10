@@ -1,4 +1,8 @@
+import { useContext } from "react";
+
 const Contacts = () => {
+  /* const {} = useContext(); */
+
   return <></>;
 };
 
