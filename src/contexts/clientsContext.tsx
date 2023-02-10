@@ -1,9 +1,12 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import GetClientApi from "../services/getClientApi";
 import LoginClientApi from "../services/loginClientApi";
 import RegisterClientApi from "../services/registerClientApi";
 
 import {
+  IClient,
   IClientData,
   IClientLogin,
   IClientsContext,
@@ -15,6 +18,8 @@ export const clientsContext = createContext<IClientsContext>(
 );
 
 const ClientsProvider = ({ children }: IClientsContextProps) => {
+  const [client, setClient] = useState<IClient>({} as IClient);
+
   const navigate = useNavigate();
 
   const loginClient = async (clientLogin: IClientLogin) => {
@@ -33,8 +38,16 @@ const ClientsProvider = ({ children }: IClientsContextProps) => {
     } catch (error) {}
   };
 
+  const getClient = async () => {
+    const clientData = await GetClientApi();
+
+    setClient(clientData);
+  };
+
   return (
-    <clientsContext.Provider value={{ loginClient, registerClient }}>
+    <clientsContext.Provider
+      value={{ loginClient, registerClient, getClient, client }}
+    >
       {children}
     </clientsContext.Provider>
   );
