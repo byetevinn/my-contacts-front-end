@@ -59,6 +59,9 @@ table {
 	
 	--Error: red;
 
+	--Care: FireBrick;
+	--Care-hover: darkred;
+
 } 
 
 `;

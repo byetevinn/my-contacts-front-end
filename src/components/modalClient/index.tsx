@@ -5,8 +5,13 @@ import { useForm } from "react-hook-form";
 import { clientsContext } from "../../contexts/clientsContext";
 
 import { IClientData } from "../../contexts/interfaces";
-import { updateClientSchema } from "../../schemas/clientsSchemas";
 import { IModalClientProps } from "./interface";
+
+import { updateClientSchema } from "../../schemas/clientsSchemas";
+
+import { DivModalClient } from "./styles";
+
+import { MdOutlineExitToApp } from "react-icons/md";
 
 const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
   const {
@@ -24,37 +29,53 @@ const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
   return (
     <>
       {activateModal && (
-        <>
-          <button onClick={() => setActiateModal(!activateModal)}>X</button>
-          <form onSubmit={handleSubmit(updateClient)}>
-            <label>
-              Email
-              <input type="text" {...register("email")} defaultValue={email} />
-              <p> {errors.email?.message} </p>
-            </label>
-            <label>
-              Senha
-              <input type="password" {...register("password")} />
-              <p> {errors.password?.message} </p>
-            </label>
-            <label>
-              Nome Completo
-              <input
-                type="text"
-                {...register("fullName")}
-                defaultValue={fullName}
-              />
-              <p> {errors.fullName?.message} </p>
-            </label>
-            <label>
-              Celular
-              <input type="text" {...register("phone")} defaultValue={phone} />
-              <p> {errors.phone?.message} </p>
-            </label>
-            <button type="submit">Atualizar</button>
-          </form>
-          <button onClick={() => deleteClient()}>Deletar Perfil</button>
-        </>
+        <DivModalClient>
+          <div className="div__modal">
+            <div className="div__exit">
+              <button onClick={() => setActiateModal(!activateModal)}>
+                {<MdOutlineExitToApp />}
+              </button>
+            </div>
+            <form onSubmit={handleSubmit(updateClient)}>
+              <label>
+                Email
+                <input
+                  type="text"
+                  {...register("email")}
+                  defaultValue={email}
+                />
+                <p> {errors.email?.message} </p>
+              </label>
+              <label>
+                Senha
+                <input type="password" {...register("password")} />
+                <p> {errors.password?.message} </p>
+              </label>
+              <label>
+                Nome Completo
+                <input
+                  type="text"
+                  {...register("fullName")}
+                  defaultValue={fullName}
+                />
+                <p> {errors.fullName?.message} </p>
+              </label>
+              <label>
+                Celular
+                <input
+                  type="text"
+                  {...register("phone")}
+                  defaultValue={phone}
+                />
+                <p> {errors.phone?.message} </p>
+              </label>
+              <button type="submit">Atualizar</button>
+              <button className="button__delete" onClick={() => deleteClient()}>
+                Deletar Perfil
+              </button>
+            </form>
+          </div>
+        </DivModalClient>
       )}
     </>
   );
