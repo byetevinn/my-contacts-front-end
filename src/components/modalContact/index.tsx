@@ -48,7 +48,7 @@ const ModalContact = ({
                 defaultValue={phone}
               />
             </label>
-            <button type="submit">Editar</button>
+            <button type="submit">Atualizar</button>
           </form>
         </>
       )}

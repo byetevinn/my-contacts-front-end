@@ -19,7 +19,7 @@ const Dashboard = () => {
     if (!token) {
       navigate("/login");
     } else {
-      getClient();
+      setTimeout(getClient, 1000);
     }
   }, []);
 

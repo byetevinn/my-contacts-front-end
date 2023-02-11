@@ -43,7 +43,7 @@ const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
                 defaultValue={phone}
               />
             </label>
-            <button type="submit">Registrar</button>
+            <button type="submit">Atualizar</button>
           </form>
           <button onClick={() => deleteClient()}>Deletar Perfil</button>
         </>
