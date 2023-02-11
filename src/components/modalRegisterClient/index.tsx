@@ -8,6 +8,9 @@ import { IClientData } from "../../contexts/interfaces";
 import { IModalRegisterClientProps } from "./interface";
 
 import { createClientSchema } from "../../schemas/clientsSchemas";
+import { DivModalRegister } from "./styles";
+
+import { MdOutlineExitToApp } from "react-icons/md";
 
 const ModalRegisterClient = ({
   activateModal,
@@ -24,8 +27,12 @@ const ModalRegisterClient = ({
   return (
     <>
       {activateModal && (
-        <>
-          <button onClick={() => setActiateModal(!activateModal)}>X</button>
+        <DivModalRegister>
+          <div className="div__exit">
+            <button onClick={() => setActiateModal(!activateModal)}>
+              {<MdOutlineExitToApp />}
+            </button>
+          </div>
           <form onSubmit={handleSubmit(createClient)}>
             <label>
               Email
@@ -65,7 +72,7 @@ const ModalRegisterClient = ({
             </label>
             <button type="submit">Registrar</button>
           </form>
-        </>
+        </DivModalRegister>
       )}
     </>
   );
