@@ -1,17 +1,20 @@
 import { ToastContainer } from "react-toastify";
 
-import ClientsProvider from "./contexts/clientsContext";
-import RoutesMain from "./routes";
+import "react-toastify/dist/ReactToastify.css";
 import Global from "./styles/global";
 
-import "react-toastify/dist/ReactToastify.css";
+import ClientsProvider from "./contexts/clientsContext";
+import ContactsProvider from "./contexts/contactsContext";
+import RoutesMain from "./routes";
 
 function App() {
   return (
     <ClientsProvider>
-      <Global />
-      <ToastContainer />
-      <RoutesMain />
+      <ContactsProvider>
+        <Global />
+        <ToastContainer />
+        <RoutesMain />
+      </ContactsProvider>
     </ClientsProvider>
   );
 }

@@ -2,13 +2,13 @@ import { toast } from "react-toastify";
 
 import api from "../api";
 
-import { IClientData } from "../../contexts/interfaces";
+import { IContactData } from "../../contexts/interfaces";
 
-const RegisterClientApi = async (clientData: IClientData) => {
+const CreateContactApi = async (contactData: IContactData) => {
   return await api
-    .post("/clients", clientData)
+    .post("/contacts", contactData)
     .then(() => {
-      toast.success("Registrado com sucesso", {
+      toast.success("Contato criado com sucesso", {
         autoClose: 1000,
         theme: "dark",
         toastId: 1,
@@ -17,14 +17,12 @@ const RegisterClientApi = async (clientData: IClientData) => {
     .catch((error) => {
       console.log(error);
 
-      toast.error("Erro ao se registrar", {
+      toast.error("Erro ao criar contato", {
         autoClose: 1000,
         theme: "dark",
         toastId: 1,
       });
-
-      throw new Error();
     });
 };
 
-export default RegisterClientApi;
+export default CreateContactApi;

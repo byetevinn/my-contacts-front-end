@@ -1,11 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DeleteClientApi from "../services/client/deleteClientApi";
+import DeleteClientApi from "../services/clients/deleteClientApi";
 
 import LoginClientApi from "../services/login/loginClientApi";
-import RegisterClientApi from "../services/client/registerClientApi";
-import GetClientApi from "../services/client/getClientApi";
-import UpdateClientApi from "../services/client/updateClientApi";
+import CreateClientApi from "../services/clients/createClientApi";
+import GetClientApi from "../services/clients/getClientApi";
+import UpdateClientApi from "../services/clients/updateClientApi";
 
 import {
   IClient,
@@ -14,6 +14,7 @@ import {
   IContextProps,
   IClientUpdate,
 } from "./interfaces";
+import { contactsContext } from "./contactsContext";
 
 export const clientsContext = createContext<IClientsContext>(
   {} as IClientsContext
@@ -21,7 +22,7 @@ export const clientsContext = createContext<IClientsContext>(
 
 interface IClientsContext {
   loginClient: (clientData: IClientLogin) => void;
-  registerClient: (clientData: IClientData) => void;
+  createClient: (clientData: IClientData) => void;
   getClient: () => void;
   updateClient: (data: IClientUpdate) => void;
   deleteClient: () => void;
@@ -31,6 +32,8 @@ interface IClientsContext {
 const ClientsProvider = ({ children }: IContextProps) => {
   const [client, setClient] = useState<IClient>({} as IClient);
 
+  const { getContact } = useContext(contactsContext);
+
   const navigate = useNavigate();
 
   const loginClient = async (clientLogin: IClientLogin) => {
@@ -38,12 +41,14 @@ const ClientsProvider = ({ children }: IContextProps) => {
       await LoginClientApi(clientLogin);
 
       navigate("/dashboard");
+
+      getContact();
     } catch (error) {}
   };
 
-  const registerClient = async (data: IClientData) => {
+  const createClient = async (data: IClientData) => {
     try {
-      await RegisterClientApi(data);
+      await CreateClientApi(data);
 
       navigate("/");
     } catch (error) {}
@@ -79,7 +84,7 @@ const ClientsProvider = ({ children }: IContextProps) => {
     <clientsContext.Provider
       value={{
         loginClient,
-        registerClient,
+        createClient,
         getClient,
         updateClient,
         deleteClient,
