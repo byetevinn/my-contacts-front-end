@@ -49,11 +49,15 @@ table {
 :root {
 
 	//Primary Palette
-	--Color-first: #592920;
-	--Color-second: #733d2f;
-	--Color-third: #9f5a43;
-	--Color-fourth: #db895e;
-	--Color-fifth: #f1c07b;
+	--Color1: #2b2d47;
+	--Color2: #524669;
+	--Color3: #896490;
+	--Color4: #d389bc;
+	--Color5: #f8b6ec;
+
+	--White: white;
+	
+	--Error: red;
 
 } 
 

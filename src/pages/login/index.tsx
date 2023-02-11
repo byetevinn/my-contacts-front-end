@@ -6,7 +6,7 @@ import ModalRegisterClient from "../../components/modalRegisterClient";
 
 import { clientsContext } from "../../contexts/clientsContext";
 import { IClientLogin } from "../../contexts/interfaces";
-import { Form } from "./style";
+import { DivLogin, Form } from "./styles";
 
 const Login = () => {
   const [activateModal, setActiateModal] = useState<boolean>(false);
@@ -26,34 +26,37 @@ const Login = () => {
   }, []);
 
   return (
-    <>
-      <Form onSubmit={handleSubmit(loginClient)}>
-        <label>
-          Email
-          <input
-            type="email"
-            placeholder="joão@mail.com"
-            {...register("email")}
-          />
-        </label>
-        <label>
-          Senha
-          <input
-            type="password"
-            placeholder="*******"
-            {...register("password")}
-          />
-        </label>
-        <button type="submit">Login</button>
-      </Form>
-      <button onClick={() => setActiateModal(!activateModal)}>
-        Registrar-se
-      </button>
+    <DivLogin>
+      {!activateModal && (
+        <Form onSubmit={handleSubmit(loginClient)}>
+          <label>
+            Email
+            <input
+              type="email"
+              placeholder="joão@mail.com"
+              {...register("email")}
+            />
+          </label>
+          <label>
+            Senha
+            <input
+              type="password"
+              placeholder="*******"
+              {...register("password")}
+            />
+          </label>
+          <button type="submit">Entrar</button>
+
+          <button onClick={() => setActiateModal(!activateModal)}>
+            Registrar-se
+          </button>
+        </Form>
+      )}
       <ModalRegisterClient
         activateModal={activateModal}
         setActiateModal={setActiateModal}
       />
-    </>
+    </DivLogin>
   );
 };
 
