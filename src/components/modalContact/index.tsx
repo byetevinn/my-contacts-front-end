@@ -1,8 +1,10 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { contactsContext } from "../../contexts/contactsContext";
 
 import { IContactData } from "../../contexts/interfaces";
+import { updateContactSchema } from "../../schemas/contactsSchemas";
 
 import { IModalContactProps } from "./interface";
 
@@ -12,7 +14,13 @@ const ModalContact = ({
   contact,
   id,
 }: IModalContactProps) => {
-  const { register, handleSubmit } = useForm<IContactData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IContactData>({
+    resolver: yupResolver(updateContactSchema),
+  });
 
   const { updateContact } = useContext(contactsContext);
 
@@ -30,7 +38,8 @@ const ModalContact = ({
           <form onSubmit={handleSubmit(update)}>
             <label>
               Email
-              <input type="email" {...register("email")} defaultValue={email} />
+              <input type="text" {...register("email")} defaultValue={email} />
+              <p> {errors.email?.message} </p>
             </label>
             <label>
               Nome Completo
@@ -39,14 +48,12 @@ const ModalContact = ({
                 {...register("fullName")}
                 defaultValue={fullName}
               />
+              <p> {errors.fullName?.message} </p>
             </label>
             <label>
               Celular
-              <input
-                type="number"
-                {...register("phone")}
-                defaultValue={phone}
-              />
+              <input type="text" {...register("phone")} defaultValue={phone} />
+              <p> {errors.phone?.message} </p>
             </label>
             <button type="submit">Atualizar</button>
           </form>

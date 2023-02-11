@@ -1,16 +1,23 @@
-import { useContext } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
 
 import { clientsContext } from "../../contexts/clientsContext";
 
 import { IClientData } from "../../contexts/interfaces";
 import { IModalRegisterClientProps } from "./interface";
 
+import { createClientSchema } from "../../schemas/clientsSchemas";
+
 const ModalRegisterClient = ({
   activateModal,
   setActiateModal,
 }: IModalRegisterClientProps) => {
-  const { register, handleSubmit } = useForm<IClientData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IClientData>({ resolver: yupResolver(createClientSchema) });
 
   const { createClient } = useContext(clientsContext);
 
@@ -23,10 +30,11 @@ const ModalRegisterClient = ({
             <label>
               Email
               <input
-                type="email"
+                type="text"
                 placeholder="joão@mail.com"
                 {...register("email")}
               />
+              <p> {errors.email?.message} </p>
             </label>
             <label>
               Senha
@@ -35,6 +43,7 @@ const ModalRegisterClient = ({
                 placeholder="*******"
                 {...register("password")}
               />
+              <p> {errors.password?.message} </p>
             </label>
             <label>
               Nome Completo
@@ -43,14 +52,16 @@ const ModalRegisterClient = ({
                 placeholder="João dos Santos"
                 {...register("fullName")}
               />
+              <p> {errors.fullName?.message} </p>
             </label>
             <label>
               Celular
               <input
-                type="number"
+                type="text"
                 placeholder="41998751475"
                 {...register("phone")}
               />
+              <p> {errors.phone?.message} </p>
             </label>
             <button type="submit">Registrar</button>
           </form>
