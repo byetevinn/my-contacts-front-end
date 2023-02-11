@@ -4,14 +4,18 @@ export interface IContextProps {
   children: ReactNode;
 }
 
-export interface IClientUpdate {
-  email: string;
-  password?: string;
-  fullName: string;
-  phone: string;
+//INTERFACES CLIENTS
+
+export interface IClient extends IContact {
+  isActive: boolean;
+  contacts: IContact[];
 }
 
-export interface IClientData extends IClientUpdate {
+export interface IClientUpdate extends IContactData {
+  password?: string;
+}
+
+export interface IClientData extends IContactData {
   password: string;
 }
 
@@ -24,6 +28,8 @@ export interface IClientLoginResponse {
   token: string;
 }
 
+//INTERFACES CONTACTS
+
 export interface IContact {
   id: string;
   email: string;
@@ -33,7 +39,10 @@ export interface IContact {
   updatedAt: string;
 }
 
-export interface IClient extends IContact {
-  isActive: boolean;
-  contacts: IContact[];
+export interface IContactData {
+  email: string;
+  fullName: string;
+  phone: string;
 }
+
+export interface IContactUpdate extends IContactData {}

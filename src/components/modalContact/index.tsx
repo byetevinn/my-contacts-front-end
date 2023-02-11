@@ -1,31 +1,36 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { contactsContext } from "../../contexts/contactsContext";
 
-import { clientsContext } from "../../contexts/clientsContext";
+import { IContactData } from "../../contexts/interfaces";
 
-import { IClientData } from "../../contexts/interfaces";
-import { IModalClientProps } from "./interface";
+import { IModalContactProps } from "./interface";
 
-const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
-  const { register, handleSubmit } = useForm<IClientData>();
+const ModalContact = ({
+  activateModal,
+  setActiateModal,
+  contact,
+  id,
+}: IModalContactProps) => {
+  const { register, handleSubmit } = useForm<IContactData>();
 
-  const { updateClient, deleteClient, client } = useContext(clientsContext);
+  const { updateContact } = useContext(contactsContext);
 
-  const { email, fullName, phone } = client;
+  const update = (data: IContactData) => {
+    updateContact(data, id);
+  };
+
+  const { email, fullName, phone } = contact;
 
   return (
     <>
       {activateModal && (
         <>
           <button onClick={() => setActiateModal(!activateModal)}>X</button>
-          <form onSubmit={handleSubmit(updateClient)}>
+          <form onSubmit={handleSubmit(update)}>
             <label>
               Email
               <input type="email" {...register("email")} defaultValue={email} />
-            </label>
-            <label>
-              Senha
-              <input type="password" {...register("password")} />
             </label>
             <label>
               Nome Completo
@@ -45,11 +50,10 @@ const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
             </label>
             <button type="submit">Atualizar</button>
           </form>
-          <button onClick={() => deleteClient()}>Deletar Perfil</button>
         </>
       )}
     </>
   );
 };
 
-export default ModalClient;
+export default ModalContact;

@@ -1,39 +1,30 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { contactsContext } from "../../contexts/contactsContext";
 
-import { clientsContext } from "../../contexts/clientsContext";
+import { IContactData } from "../../contexts/interfaces";
+import { IModalRegisterContactProps } from "./interface";
 
-import { IClientData } from "../../contexts/interfaces";
-import { IModalRegisterClientProps } from "./interface";
-
-const ModalRegisterClient = ({
+const ModalRegisterContact = ({
   activateModal,
   setActiateModal,
-}: IModalRegisterClientProps) => {
-  const { register, handleSubmit } = useForm<IClientData>();
+}: IModalRegisterContactProps) => {
+  const { register, handleSubmit } = useForm<IContactData>();
 
-  const { createClient } = useContext(clientsContext);
+  const { createContact } = useContext(contactsContext);
 
   return (
     <>
       {activateModal && (
         <>
           <button onClick={() => setActiateModal(!activateModal)}>X</button>
-          <form onSubmit={handleSubmit(createClient)}>
+          <form onSubmit={handleSubmit(createContact)}>
             <label>
               Email
               <input
                 type="email"
                 placeholder="joão@mail.com"
                 {...register("email")}
-              />
-            </label>
-            <label>
-              Senha
-              <input
-                type="password"
-                placeholder="*******"
-                {...register("password")}
               />
             </label>
             <label>
@@ -52,7 +43,7 @@ const ModalRegisterClient = ({
                 {...register("phone")}
               />
             </label>
-            <button type="submit">Registrar</button>
+            <button type="submit">Criar</button>
           </form>
         </>
       )}
@@ -60,4 +51,4 @@ const ModalRegisterClient = ({
   );
 };
 
-export default ModalRegisterClient;
+export default ModalRegisterContact;
