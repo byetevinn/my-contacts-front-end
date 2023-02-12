@@ -11,7 +11,8 @@ Projeto desenvolvido com a finalidade de armazenar contatos.
 
 3- Por fim use o comando `yarn start` para poder rodar a aplicação em local-host
 
-OBS: Não esqueceça que precisa estar rodando a API da aplicação para funcionar o site de forma correta. Caso altere a porta onde a API está funcionando precisa trocar a porta 
+OBS: Não esqueceça que precisa estar rodando a API da aplicação que está no <a href="https://github.com/byetevinn/my-contacts-back-end">Back-End</a> para o site funcionar de forma correta.
+Caso altere a porta onde a API está funcionando vai precisa trocar tambémm a porta no arquivo `api.ts` dessa aplicação que está no caminho `src > services > api.ts`.
 
 
 # Tecnologias usadas no projeto
@@ -20,34 +21,22 @@ OBS: Não esqueceça que precisa estar rodando a API da aplicação para funcion
 
 - JAVASCRIPT
 - TYPESCRIPT
-
-#### Ambiente de Execução
-
-- NODE.JS
+- CSS
 
 #### Framework
 
-- EXPRESS
-
-#### ORM
-
-- TYPEORM
+- REACT
 
 #### Bibliotecas
 
-- BCRYPT
-- CLASS-TRANSFORMER
-- CROSS-ENV
-- DOTENV
-- EXPRESS-ASYNC-ERRORS
-- JEST
-- JSONWEBTOKEN
-- PG
-- REFLECT-METADATA
-- SQLITE3
-- SUPERTEST
-- TS-JEST
-- TS-NODE-DEV
+- @HOOKFORM/RESOLVERS
+- AXIOS
+- REACT-HOOK-FORM
+- REACT-ICONS
+- REACT-ROUTER-DOM
+- REACT-TOASTIFY
+- STYLED-COMPONENTS
+- UUID
 - YUP
 
 <p align ='center'> Copyright <a href="https://github.com/byetevinn">Stevan Padilha</a> 2023 </p>
