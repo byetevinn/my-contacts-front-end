@@ -1,8 +1,13 @@
 import { useContext, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { contactsContext } from "../../contexts/contactsContext";
 
-import { v4 as uuidv4 } from "uuid";
 import ModalContact from "../modalContact";
+
+import { ListContacts } from "./styles";
+
+import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
 const Contacts = () => {
   const [activateModal, setActiateModal] = useState<boolean>(false);
@@ -11,30 +16,44 @@ const Contacts = () => {
 
   return (
     <>
-      {contacts.length > 0 &&
-        contacts.map(({ id, email, fullName, phone }) => {
-          return (
-            <li key={uuidv4()}>
-              <div>
-                <p>Email: {email}</p>
-                <p>Nome: {fullName}</p>
-                <p>Telefone: {phone}</p>
-              </div>
-              <div>
-                <button onClick={() => setActiateModal(!activateModal)}>
-                  Editar
-                </button>
+      {contacts.length > 0 && (
+        <ListContacts>
+          {contacts.map(({ id, email, fullName, phone }) => {
+            return (
+              <li key={uuidv4()}>
+                <div className="div__infos">
+                  <p>
+                    <strong>Email:</strong> {email}
+                  </p>
+                  <p>
+                    <strong>Nome:</strong> {fullName}
+                  </p>
+                  <p>
+                    <strong>Telefone:</strong> {phone}
+                  </p>
+                </div>
+                <div className="div__buttons">
+                  <button onClick={() => setActiateModal(!activateModal)}>
+                    {<AiOutlineEdit />}
+                  </button>
+                  <button
+                    className="button__delete"
+                    onClick={() => deleteContact(id)}
+                  >
+                    {<AiOutlineDelete />}
+                  </button>
+                </div>
                 <ModalContact
                   activateModal={activateModal}
                   setActiateModal={setActiateModal}
                   contact={{ email, fullName, phone }}
                   id={id}
                 />
-                <button onClick={() => deleteContact(id)}>Deletar</button>
-              </div>
-            </li>
-          );
-        })}
+              </li>
+            );
+          })}
+        </ListContacts>
+      )}
     </>
   );
 };

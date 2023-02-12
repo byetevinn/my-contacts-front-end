@@ -20,7 +20,9 @@ const ModalRegisterClient = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IClientData>({ resolver: yupResolver(createClientSchema) });
+  } = useForm<IClientData>({
+    resolver: yupResolver(createClientSchema),
+  });
 
   const { createClient } = useContext(clientsContext);
 
@@ -51,6 +53,15 @@ const ModalRegisterClient = ({
                 {...register("password")}
               />
               <p> {errors.password?.message} </p>
+            </label>
+            <label>
+              Confirmar Senha
+              <input
+                type="password"
+                placeholder="*******"
+                {...register("confirm_password")}
+              />
+              <p> {errors.confirm_password?.message} </p>
             </label>
             <label>
               Nome Completo

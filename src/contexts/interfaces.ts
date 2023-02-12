@@ -17,6 +17,7 @@ export interface IClientUpdate extends IContactData {
 
 export interface IClientData extends IContactData {
   password: string;
+  confirm_password?: string;
 }
 
 export interface IClientLogin {

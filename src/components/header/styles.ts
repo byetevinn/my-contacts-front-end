@@ -9,6 +9,17 @@ export const DivHeader = styled.header`
 
   padding: 5px 50px;
 
+  h1 {
+    display: flex;
+    text-align: center;
+
+    font-size: 28px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+
+    color: var(--Color1);
+  }
+
   .div__buttons {
     display: flex;
 
@@ -22,7 +33,7 @@ export const DivHeader = styled.header`
 
       font-size: 30px;
 
-      color: var(--Color3);
+      color: var(--Color1);
 
       box-sizing: border-box;
       border: none;
