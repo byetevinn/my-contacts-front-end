@@ -13,6 +13,9 @@ export const createClientSchema = yup.object().shape({
     .matches(/(\d)/, "Deve conter pelo menos 1 número")
     .matches(/(\W)|_/, "Deve conter pelo menos 1 caractere especial")
     .matches(/.{8,}/, "Deve conter no mínimo 8 caracteres"),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref("password")], "As senhas devem ser iguais"),
   fullName: yup.string().required("Campo obrigatório"),
   phone: yup
     .string()
@@ -51,6 +54,9 @@ export const updateClientSchema = yup.object().shape({
       if (!value) return true;
       return /.{8,}/.test(value);
     }),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref("password"), "As senhas devem ser iguais"]),
   fullName: yup.string().notRequired(),
   phone: yup
     .string()
