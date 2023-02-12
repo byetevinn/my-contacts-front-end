@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 import { clientsContext } from "../../contexts/clientsContext";
 
-import { IClientData } from "../../contexts/interfaces";
+import { IClientData, IClientUpdate } from "../../contexts/interfaces";
 import { IModalClientProps } from "./interface";
 
 import { updateClientSchema } from "../../schemas/clientsSchemas";
@@ -26,6 +26,14 @@ const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
 
   const { email, fullName, phone } = client;
 
+  const onUpdate = (data: IClientUpdate) => {
+    try {
+      updateClient(data);
+
+      setActiateModal(!activateModal);
+    } catch (error) {}
+  };
+
   return (
     <>
       {activateModal && (
@@ -36,7 +44,7 @@ const ModalClient = ({ activateModal, setActiateModal }: IModalClientProps) => {
                 {<MdOutlineExitToApp />}
               </button>
             </div>
-            <form onSubmit={handleSubmit(updateClient)}>
+            <form onSubmit={handleSubmit(onUpdate)}>
               <label>
                 Email
                 <input

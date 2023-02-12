@@ -65,11 +65,13 @@ const ClientsProvider = ({ children }: IContextProps) => {
 
     const clientNoPassword = { email, fullName, phone };
 
-    if (password!.length > 0) {
-      await UpdateClientApi(clientData);
-    } else {
-      await UpdateClientApi(clientNoPassword);
-    }
+    try {
+      if (password!.length > 0) {
+        await UpdateClientApi(clientData);
+      } else {
+        await UpdateClientApi(clientNoPassword);
+      }
+    } catch (error) {}
   };
 
   const deleteClient = async () => {

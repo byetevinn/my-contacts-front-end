@@ -22,6 +22,8 @@ const UpdateContactApi = async (contactData: IContactUpdate, id: string) => {
         theme: "dark",
         toastId: 1,
       });
+
+      throw new Error();
     });
 };
 
