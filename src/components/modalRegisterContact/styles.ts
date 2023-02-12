@@ -27,6 +27,8 @@ export const DivModalRegisterContact = styled.div`
     justify-content: center;
     align-items: center;
 
+    background-color: var(--White);
+
     gap: 20px 0px;
     padding: 20px;
 

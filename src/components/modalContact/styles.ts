@@ -118,14 +118,6 @@ export const DivModalContact = styled.div`
       button:hover {
         background-color: var(--Color4);
       }
-
-      .button__delete {
-        background-color: var(--Care);
-      }
-
-      .button__delete:hover {
-        background-color: var(--Care-hover);
-      }
     }
   }
 `;

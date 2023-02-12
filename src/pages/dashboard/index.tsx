@@ -1,10 +1,12 @@
-import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Header from "../../components/header";
 import Contacts from "../../components/contacts";
-import { clientsContext } from "../../contexts/clientsContext";
 import ModalRegisterContact from "../../components/modalRegisterContact";
+import { clientsContext } from "../../contexts/clientsContext";
+
+import { DivDashboard } from "./styles";
 
 const Dashboard = () => {
   const [activateModal, setActiateModal] = useState<boolean>(false);
@@ -24,20 +26,24 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <>
+    <DivDashboard>
       <Header />
 
-      <button onClick={() => setActiateModal(!activateModal)}>
-        Criar contato
-      </button>
-      <ModalRegisterContact
-        activateModal={activateModal}
-        setActiateModal={setActiateModal}
-      />
-      <ol>
+      <main>
+        <div className="div__button">
+          <button onClick={() => setActiateModal(!activateModal)}>
+            Criar contato
+          </button>
+        </div>
+
+        <ModalRegisterContact
+          activateModal={activateModal}
+          setActiateModal={setActiateModal}
+        />
+
         <Contacts />
-      </ol>
-    </>
+      </main>
+    </DivDashboard>
   );
 };
 
