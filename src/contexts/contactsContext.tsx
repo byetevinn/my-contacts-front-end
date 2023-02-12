@@ -23,9 +23,11 @@ const ContactsProvider = ({ children }: IContextProps) => {
   const [contacts, setContacts] = useState<IContact[]>([]);
 
   const createContact = async (contactData: IContactData) => {
-    await CreateContactApi(contactData);
+    try {
+      await CreateContactApi(contactData);
 
-    await getContact();
+      await getContact();
+    } catch (error) {}
   };
 
   const getContact = async () => {
@@ -37,9 +39,11 @@ const ContactsProvider = ({ children }: IContextProps) => {
   };
 
   const updateContact = async (contactData: IContactData, id: string) => {
-    await UpdateContactApi(contactData, id);
+    try {
+      await UpdateContactApi(contactData, id);
 
-    await getContact();
+      await getContact();
+    } catch (error) {}
   };
 
   const deleteContact = async (id: string) => {

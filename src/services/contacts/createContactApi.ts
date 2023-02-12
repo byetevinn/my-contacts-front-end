@@ -22,6 +22,8 @@ const CreateContactApi = async (contactData: IContactData) => {
         theme: "dark",
         toastId: 1,
       });
+
+      throw new Error();
     });
 };
 

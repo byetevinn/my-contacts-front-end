@@ -22,6 +22,8 @@ const UpdateClientApi = async (clientData: IClientUpdate) => {
         theme: "dark",
         toastId: 1,
       });
+
+      throw new Error();
     });
 };
 

@@ -29,8 +29,12 @@ const ModalContact = ({
 
   const { updateContact } = useContext(contactsContext);
 
-  const update = (data: IContactData) => {
-    updateContact(data, id);
+  const onUpdate = (data: IContactData) => {
+    try {
+      updateContact(data, id);
+
+      setActiateModal(!activateModal);
+    } catch (error) {}
   };
 
   const { email, fullName, phone } = contact;
@@ -45,7 +49,7 @@ const ModalContact = ({
                 {<MdOutlineExitToApp />}
               </button>
             </div>
-            <form onSubmit={handleSubmit(update)}>
+            <form onSubmit={handleSubmit(onUpdate)}>
               <label>
                 Email
                 <input

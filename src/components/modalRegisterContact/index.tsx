@@ -21,11 +21,22 @@ const ModalRegisterContact = ({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<IContactData>({
     resolver: yupResolver(createContactSchema),
   });
 
   const { createContact } = useContext(contactsContext);
+
+  const onCreate = (data: IContactData) => {
+    try {
+      createContact(data);
+
+      setActiateModal(!activateModal);
+
+      reset();
+    } catch (error) {}
+  };
 
   return (
     <>
@@ -37,7 +48,7 @@ const ModalRegisterContact = ({
                 {<MdOutlineExitToApp />}
               </button>
             </div>
-            <form onSubmit={handleSubmit(createContact)}>
+            <form onSubmit={handleSubmit(onCreate)}>
               <label>
                 Email
                 <input
